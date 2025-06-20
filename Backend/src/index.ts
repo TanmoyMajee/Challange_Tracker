@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db';
+import cors from 'cors'
+import authRoutes from './routes/authRoute';
 // Load environment variables from .env file
 dotenv.config();
 
@@ -13,10 +15,14 @@ connectDB();
 // Middleware to parse JSON
 app.use(express.json());
 
+app.use(cors());
+
 // Basic route
 app.get('/', (req: Request, res: Response) => {
   res.send('Daily Challenge Tracker API is running!');
 });
+
+app.use('/api/auth',authRoutes);
 
 // Start the server
 app.listen(PORT, () => {
