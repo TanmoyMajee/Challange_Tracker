@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 import { register } from '../controller/auth/register';
 import { login } from '../controller/auth/login';
 
