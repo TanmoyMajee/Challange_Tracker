@@ -1,12 +1,6 @@
 import mongoose from 'mongoose';
 
 
-// export interface Challenge  {
-//     title: String,
-//    description: String,
-
-// }
-
 const ChallengeSchema = new mongoose.Schema(
   {
     title: {
@@ -20,6 +14,10 @@ const ChallengeSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Task_User',
       required: true,
+    },
+    assignedUsers: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task_User' }],
+      default: []
     },
     startDate: {
       type: Date,

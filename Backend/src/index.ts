@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db';
 import cors from 'cors'
 import authRoutes from './routes/authRoute';
+import challengeRouts from './routes/challangeRoute'
 // Load environment variables from .env file
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/api/auth',authRoutes);
+app.use('/api/cahllange',challengeRouts);
 
 // Start the server
 app.listen(PORT, () => {

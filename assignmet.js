@@ -71,7 +71,7 @@ Logic: Add token to blacklist or handle client-side token removal
 
 GET /api/auth/profile
 
-Access: Protected (users see own profile, admins see any profile)
+Access: Protected (users see own profile, )
 Purpose: Retrieve current user's profile information
 Headers: Authorization Bearer token required
 Response: User profile data excluding password
