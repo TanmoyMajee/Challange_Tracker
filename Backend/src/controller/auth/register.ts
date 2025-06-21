@@ -19,7 +19,7 @@ export const register = async (req:Request,res:Response) : Promise<void>=>{
         const existingUser =await UserModel.findOne({email});
 
         if(existingUser){
-          res.status(400).json({ msg: "Username already exist" }); return; 
+          res.status(400).json({ msg: "User already exists" }); return; 
         }
         // now create the user [ hash the pass]
       const hashedPassword = await bcrypt.hash(password, 10);
