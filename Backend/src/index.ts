@@ -10,6 +10,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+
+
 // connect to db
 connectDB(); 
 
@@ -24,7 +26,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/api/auth',authRoutes);
-app.use('/api/cahllange',challengeRouts);
+app.use('/api/challange',challengeRouts);
 
 // Start the server
 app.listen(PORT, () => {

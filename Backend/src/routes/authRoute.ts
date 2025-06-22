@@ -17,4 +17,6 @@ router.post('/register', register);
 router.get('/profile', verifyUser, getProfile);
 router.get('/gelAllUsers', verifyUser, getAlluser);
 
+
+
 export default router;

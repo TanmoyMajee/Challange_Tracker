@@ -6,7 +6,7 @@ import { verifyAdmin } from "../middleware/verifyRole"; // If you have a specifi
 import { getAllChalanges } from "../controller/challenges/getChallenges";
 import { postAllChalanges } from "../controller/challenges/postChallenge";
 import { updateChallenge } from "../controller/challenges/updateChallenge";
-// import { deleteChallenge } from "../controller/challenges/deleteChallenge";
+import { deleteChallenge } from "../controller/challenges/deleteChallenge";
 // import { getChallengeById } from "../controller/challenges/getChallengeById";
 // import { assignChallenge } from "../controller/challenges/assignChallenge";
 // import { getChallengesByStatus } from "../controller/challenges/getChallengesByStatus";
@@ -26,7 +26,7 @@ router.post("/", verifyUser, postAllChalanges);
 router.put("/:id", verifyUser, updateChallenge);
 
 // Delete a challenge (creator or admin)
-// router.delete("/:id", verifyUser, deleteChallenge);
+router.delete("/:id", verifyUser, deleteChallenge);
 
 // Assign challenge to users
 // router.post("/:id/assign", verifyUser, assignChallenge);

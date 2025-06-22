@@ -24,33 +24,35 @@ export const updateChallenge = async (req: Request, res: Response): Promise<void
       return;
     }
 
-    // Check permissions: only creator or admin can update
+    // permissions: only creator or admin can update
     if (
-      challenge.createdBy.toString() !== req.user._id.toString() &&
-      req.user.role !== 'admin'
-    ) {
+      challenge.createdBy.toString() === req.user._id.toString() ||
+      req.user.role === 'admin'
+    ){
+      // Apply updates
+      if (updates.title !== undefined) challenge.title = updates.title;
+      if (updates.description !== undefined) challenge.description = updates.description;
+      if (updates.startDate !== undefined) challenge.startDate = new Date(updates.startDate);
+      if (updates.endDate !== undefined) challenge.endDate = new Date(updates.endDate);
+      if (updates.isActive !== undefined) challenge.isActive = updates.isActive;
+      if (updates.assignedUserIds !== undefined) {
+        challenge.assignedUsers = updates.assignedUserIds.map(
+          (id: string) => new mongoose.Types.ObjectId(id)
+        );
+      }
+
+      await challenge.save();
+
+      res.status(200).json({
+        msg: "Challenge updated successfully",
+        challenge
+      });
+      
+    }else{
       res.status(403).json({ msg: "Not authorized to update this challenge" });
       return;
     }
 
-    // Apply updates
-    if (updates.title !== undefined) challenge.title = updates.title;
-    if (updates.description !== undefined) challenge.description = updates.description;
-    if (updates.startDate !== undefined) challenge.startDate = new Date(updates.startDate);
-    if (updates.endDate !== undefined) challenge.endDate = new Date(updates.endDate);
-    if (updates.isActive !== undefined) challenge.isActive = updates.isActive;
-    if (updates.assignedUserIds !== undefined) {
-      challenge.assignedUsers = updates.assignedUserIds.map(
-        (id: string) => new mongoose.Types.ObjectId(id)
-      );
-    }
-
-    await challenge.save();
-
-    res.status(200).json({
-      msg: "Challenge updated successfully",
-      challenge
-    });
   } catch (error: any) {
     if (error instanceof z.ZodError) {
       res.status(400).json({ msg: "Validation error", errors: error.errors });
