@@ -19,7 +19,7 @@ const progressSchema = z.object({
 export const createProgress = async (req: Request, res: Response): Promise<void> => {
   try {
     // Validate request body
-    const { challengeId, date, isCompleted, notes } = progressSchema.parse(req.body);
+    const { challengeId, date, isCompleted, notes } = progressSchema.parse(req.body); 
 
     // Convert date string to Date object for comparison
     const progressDate = new Date(date);
@@ -59,7 +59,7 @@ export const createProgress = async (req: Request, res: Response): Promise<void>
     // User must be creator OR assigned OR admin
     if ( !isAssigned ) {
       res.status(403).json({
-        msg: "You are not authorized to track progress for this challenge. You must be the creator, assigned to the challenge, or an admin."
+        msg: "You are not authorized to create progress for this challenge. You must be the  assigned to the challenge, [admin | createor can't acces if he is not assigned]"
       });
       return;
     }

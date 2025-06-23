@@ -22,14 +22,18 @@ router.post("/", verifyUser, postAllChalanges);
 // Get a specific challenge by ID
 router.get("/:id", verifyUser, getChallengeById);
 
+
+// Assign challenge to users [chlng id as params ] (creator or admin)
+router.post("/:id/assign", verifyUser, assignChallenge);
+
 // Update a challenge (creator or admin)
 router.put("/:id", verifyUser, updateChallenge);
+
 
 // Delete a challenge (creator or admin)
 router.delete("/:id", verifyUser, deleteChallenge);
 
-// Assign challenge to users [chlng id as params ] (creator or admin)
-router.post("/assign/:id", verifyUser, assignChallenge);
+
 
 // Get challenges by status (current/upcoming/completed)
 // router.get("/status/:status", verifyUser, getChallengesByStatus);
