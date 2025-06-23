@@ -20,6 +20,6 @@ router.post("/", createProgress);
 router.get("/", getProgress);
 
 // GET /api/progress/today - Get today's pending/completed challenges
-router.get("/today", getTodayProgress);
+router.get("/today", getTodayProgress); 
 
 export default router;
