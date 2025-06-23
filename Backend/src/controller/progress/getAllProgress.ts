@@ -14,7 +14,7 @@ const querySchema = z.object({
   userId: z.string().optional()
 });
 
-export const getProgress = async (req: Request, res: Response) => {
+export const getProgress = async (req: Request, res: Response) :Promise<void> => {
   try {
     // Validate query parameters
     const { challengeId, startDate, endDate, userId } = querySchema.parse(req.query);
@@ -22,7 +22,8 @@ export const getProgress = async (req: Request, res: Response) => {
     // Check if challenge exists
     const challenge = await ChallengeModel.findById(challengeId);
     if (!challenge) {
-      return res.status(404).json({ msg: "Challenge not found" });
+       res.status(404).json({ msg: "Challenge not found" });
+      return;
     }
 
     // Authorization: Only creator, assigned users, or admin can access
@@ -33,7 +34,8 @@ export const getProgress = async (req: Request, res: Response) => {
     const isAdmin = req.user.role === 'admin';
 
     if (!isCreator && !isAssigned && !isAdmin) {
-      return res.status(403).json({ msg: "You are not authorized to view progress for this challenge." });
+      res.status(403).json({ msg: "You are not authorized to view progress for this challenge." });
+      return;
     }
 
     // Build filter

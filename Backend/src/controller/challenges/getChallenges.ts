@@ -6,7 +6,7 @@ export const getAllChalanges = async (req: Request, res: Response): Promise<void
   // admin can get all the challanges 
   // user can get the cahllanges that are created by him or 
   // assigned to him
-
+  
   try {
     let challenges;
 

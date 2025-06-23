@@ -4,6 +4,7 @@ import connectDB from './config/db';
 import cors from 'cors'
 import authRoutes from './routes/authRoute';
 import challengeRouts from './routes/challangeRoute'
+import progressRoutes from './routes/progressRoute'
 // Load environment variables from .env file
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/auth',authRoutes);
 app.use('/api/challange',challengeRouts);
+app.use('/api/progress',progressRoutes);
 
 // Start the server
 app.listen(PORT, () => {
